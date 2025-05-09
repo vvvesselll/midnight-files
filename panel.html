@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel - Midnight Files</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #1a001f, #2a0033);
+      color: white;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      color: #c084fc;
+      margin-bottom: 1rem;
+    }
+
+    .cheats {
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(155, 89, 182, 0.5);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .cheat-option {
+      margin: 0.5rem 0;
+      font-size: 1.2rem;
+      text-align: center;
+    }
+
+    button {
+      margin-top: 2rem;
+      padding: 10px 20px;
+      border: none;
+      background-color: #9b59b6;
+      color: white;
+      font-weight: bold;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #8e44ad;
+    }
+
+    .download-btn {
+      margin-top: 1rem;
+      padding: 10px 20px;
+      background-color: #3498db;
+      color: white;
+      font-weight: bold;
+      border-radius: 5px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .download-btn:hover {
+      background-color: #2980b9;
+    }
+  </style>
+</head>
+<body>
+  <h1>Witaj w Midnight Files</h1>
+  <div class="cheats">
+    <div class="cheat-option">✅ Nie wykrywalny timer na killerce!</div>
+    <div class="cheat-option">✅ Zmiana w kodzie na pliki z itemami oraz kopiowanie itemów poprzez niską wydajność klienta na wymagania serwera z danymi!</div>
+  </div>
+  <a href="path/to/your/file.zip" class="download-btn" download>Pobierz plik</a>
+  <button onclick="logout()">Wyloguj się</button>
+
+  <script>
+    function logout() {
+      window.location.href = "login.html";
+    }
+  </script>
+</body>
+</html>
